@@ -50,7 +50,22 @@
     init();
     setInterval(loop, 1000/15);
 
-    document.addEventListener('keydown', e => {});
+    document.addEventListener('keydown', e => {
+        switch(e.key) {
+            case 'ArrowLeft':
+                snake.dx = -1;snake.dy = 0;
+                break;
+            case 'ArrowRight':
+                snake.dx = 1;snake.dy = 0;
+                break;
+            case 'ArrowUp':
+                snake.dx = 0;snake.dy = -1;
+                break;
+            case 'ArrowDown':
+                snake.dx = 0;snake.dy = 1;
+                break;
+        }
+    });
 </script>
 </body>
 </html>
