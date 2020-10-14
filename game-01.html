@@ -40,7 +40,7 @@
 
         update: function() {
             ctx.fillStyle = 'red'
-            ctx.fillRect(this.x, this.y*GRID, GRID, GRID);
+            ctx.fillRect(this.x*GRID, this.y*GRID, GRID, GRID);
         }
     }
 
@@ -57,6 +57,12 @@
         ctx.clearRect(0,0,canvas.width, canvas.height);
         snake.update();
         item.update();
+
+        if(snake.x === item.x && snake.y === item.y){
+            snake.tail++;
+            item.x = Math.floor(Math.random() * STAGE);
+            item.y = Math.floor(Math.random() * STAGE);
+        }
     }
 
     init();
