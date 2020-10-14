@@ -34,17 +34,29 @@
             if(this.body.length > this.tail) this.body.shift();
         }
     }
-    const item = {}
+    const item = {
+        x: null,
+        y: null,
+
+        update: function() {
+            ctx.fillStyle = 'red'
+            ctx.fillRect(this.x, this.y*GRID, GRID, GRID);
+        }
+    }
 
     const init = () => {
         snake.x = STAGE / 2;
         snake.y = STAGE / 2;
         snake.tail = 4;
         snake.body = [];
+
+        item.x = Math.floor(Math.random() * STAGE);
+        item.y = Math.floor(Math.random() * STAGE);
     }
     const loop = () => {
         ctx.clearRect(0,0,canvas.width, canvas.height);
         snake.update();
+        item.update();
     }
 
     init();
