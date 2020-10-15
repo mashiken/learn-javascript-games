@@ -4,8 +4,8 @@
 <script>
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = 400;
-    canvas.height = 400;
+    canvas.width = 600;
+    canvas.height = 600;
 
     canvas.setAttribute('style', 'display:block; margin:auto; background-color: #aaa')
 
@@ -41,7 +41,27 @@
         y: null,
 
         update: function() {
-            ctx.fillStyle = 'red'
+            ctx.fillStyle = 'red';
+            ctx.fillRect(this.x*GRID, this.y*GRID, GRID, GRID);
+        }
+    }
+
+    const itemB = {
+        x: null,
+        y: null,
+
+        update: function() {
+            ctx.fillStyle = 'red';
+            ctx.fillRect(this.x*GRID, this.y*GRID, GRID, GRID);
+        }
+    }
+
+    const itemC = {
+        x: null,
+        y: null,
+
+        update: function() {
+            ctx.fillStyle = 'purple';
             ctx.fillRect(this.x*GRID, this.y*GRID, GRID, GRID);
         }
     }
@@ -54,11 +74,20 @@
 
         item.x = Math.floor(Math.random() * STAGE);
         item.y = Math.floor(Math.random() * STAGE);
+        itemB.x = Math.floor(Math.random() * STAGE);
+        itemB.y = Math.floor(Math.random() * STAGE);
+        itemC.x = Math.floor(Math.random() * STAGE);
+        itemC.y = Math.floor(Math.random() * STAGE);
     }
+
     const loop = () => {
         ctx.clearRect(0,0,canvas.width, canvas.height);
         snake.update();
         item.update();
+
+        itemB.update();
+     
+        itemC.update();
 
         if(snake.x < 0)     snake.x = STAGE-1;
         if(snake.y < 0)     snake.y = STAGE-1;
@@ -69,6 +98,18 @@
             snake.tail++;
             item.x = Math.floor(Math.random() * STAGE);
             item.y = Math.floor(Math.random() * STAGE);
+        }
+
+        if(snake.x === itemB.x && snake.y === itemB.y){
+            snake.tail++;
+            itemB.x = Math.floor(Math.random() * STAGE);
+            itemB.y = Math.floor(Math.random() * STAGE);
+        }
+
+        if(snake.x === itemC.x && snake.y === itemC.y){
+            snake.tail--;
+            itemC.x = Math.floor(Math.random() * STAGE);
+            itemC.y = Math.floor(Math.random() * STAGE);
         }
     }
 
