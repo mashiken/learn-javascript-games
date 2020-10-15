@@ -58,6 +58,11 @@
         snake.update();
         item.update();
 
+        if(snake.x < 0)     snake.x = STAGE-1;
+        if(snake.y < 0)     snake.y = STAGE-1;
+        if(snake.x > STAGE-1) snake.x = 0;
+        if(snake.y > STAGE-1) snake.y = 0;
+
         if(snake.x === item.x && snake.y === item.y){
             snake.tail++;
             item.x = Math.floor(Math.random() * STAGE);
