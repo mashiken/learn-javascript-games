@@ -29,6 +29,8 @@
             ctx.fillStyle = 'green';
             this.body.forEach(obj => {
                 ctx.fillRect(obj.x*GRID, obj.y*GRID, GRID-2, GRID-2);
+                
+                if(this.x === obj.x && this.y == obj.y) init();
 
             })
             if(this.body.length > this.tail) this.body.shift();
