@@ -16,7 +16,10 @@
 
     const init = () => {}
     const collide = () => {}
-    const loop = () => {}
+    const loop = () => {
+
+        window.requestAnimationFrame(loop);
+    }
 
     init();
     loop();
