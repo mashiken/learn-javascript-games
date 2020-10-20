@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p id="text"></p>
+<script>
+    var p = document.getElementById('text');
+    var textList = [
+        'Hello World',
+        'This is my App',
+        'How are you?',
+        'Hello Hello'
+    ];
+    var checkTexts = [];
+
+    checkTexts = textList[0].split('');
+
+    console.log(checkTexts);
+
+    p.textContent = textList[0];
+
+    document.addEventListener('keydown', keyDown);
+
+    function keyDown(e){
+ 
+        if(e.key === checkTexts[0]) {
+            console.log('OK');
+        }
+    }
+</script>
+</body>
+</html>
