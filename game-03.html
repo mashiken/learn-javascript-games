@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<head>
+<link rel="stylesheet" href="game-03.css">
+</head>
 <body>
 <p id="text"></p>
 <script>
@@ -12,18 +15,24 @@
     ];
     var checkTexts = [];
 
-    checkTexts = textList[0].split('');
+    checkTexts = textList[0].split('').map(function(value){
+        var span = document.createElement('span');
+
+        span.textContent = value;
+        p.appendChild(span);
+
+        return span;
+    });
 
     console.log(checkTexts);
-
-    p.textContent = textList[0];
 
     document.addEventListener('keydown', keyDown);
 
     function keyDown(e){
- 
-        if(e.key === checkTexts[0]) {
-            console.log('OK');
+        if(e.key === checkTexts[0].textContent){
+            checkTexts[0].className = 'add-bule';
+
+            checkTexts.shift();
         }
     }
 </script>
