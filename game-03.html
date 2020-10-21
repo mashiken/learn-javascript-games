@@ -13,16 +13,24 @@
         'How are you?',
         'Hello Hello'
     ];
+
     var checkTexts = [];
+    createText();
 
-    checkTexts = textList[0].split('').map(function(value){
-        var span = document.createElement('span');
+    function createText() {
+        var rnd = Math.floor(Math.random() * textList.length);
 
-        span.textContent = value;
-        p.appendChild(span);
+        p.textContent = '';
+        checkTexts = textList[rnd].split('').map(function(value){
+            var span = document.createElement('span');
 
-        return span;
-    });
+            span.textContent = value;
+            p.appendChild(span);
+
+            return span;
+        });
+
+    }
 
     console.log(checkTexts);
 
@@ -33,6 +41,8 @@
             checkTexts[0].className = 'add-bule';
 
             checkTexts.shift();
+
+            if(!checkTexts.length) createText();
         }
     }
 </script>
