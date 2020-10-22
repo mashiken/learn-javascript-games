@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>お絵描きアプリ</title>
+        <style>
+        body {
+            margin: 0;
+        }
+            #canvas {
+                background-color: #aaa;
+            }
+        </style>
+    </head>
+    <canvas id="canvas"></canvas>
+    <body>
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth - 2;
+        canvas.height = window.innerHeight - 2;
+    </script>
+    </body>
+</html>
