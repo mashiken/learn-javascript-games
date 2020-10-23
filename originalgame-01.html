@@ -1,6 +1,19 @@
 <html>
 <body>
+<canvas id="sample" width="500" height="630", style="display:block;margin:auto;background-color:#CCFFFF"></canvas>
 <script>
+    var canvas = document.getElementById('sample');
+    var context = canvas.getContext('2d');
+
+
+    context.beginPath();
+    var grad = context.createLinearGradient(0,0,0,630);
+    grad.addColorStop(0, '#CCFFFF');
+    grad.addColorStop(0.9, '#CCFFFF');
+    grad.addColorStop(1, '#0099CC');
+    context.fillStyle = grad;
+    context.rect(0,0,500,630);
+    context.fill();
 </script>
 </body>
 </html>
