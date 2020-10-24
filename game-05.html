@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html>
 <body>
-<canvas id="sample"></canvas>
+<canvas id="canvas"></canvas>
 <script>
+    const BLOCK_SIZE = 30;
+    const TETRO_SIZE = 4;
 
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
 
+    let tetro = [
+        [0,0,0,0],
+        [1,1,0,0],
+        [0,1,1,0],
+        [0,0,0,0]
+    ];
+
+    for(let y=0; y<TETRO_SIZE; y++)
+    {
+        for(let x=0; x<TETRO_SIZE; x++)
+        {
+            if( tetro[y][x] )
+            {
+                let px = x * BLOCK_SIZE;
+                let py = y * BLOCK_SIZE;
+
+                ctx.fillStyle="red";
+                ctx.fillRect(px,py, BLOCK_SIZE, BLOCK_SIZE);
+            
+                ctx.strokeStyle="black";
+                ctx.strokeRect(px,py, BLOCK_SIZE, BLOCK_SIZE);
+
+            }
+        }
+
+    }
 </script>
 </body>
 </html>
