@@ -3,11 +3,22 @@
 <body>
 <canvas id="canvas"></canvas>
 <script>
+
+    const FIELD_COL = 10;
+    const FIELD_LOW = 20;
+
     const BLOCK_SIZE = 30;
     const TETRO_SIZE = 4;
 
+    const SCREEN_W = BLOCK_SIZE * FIELD_COL;
+    const SCREEN_H = BLOCK_SIZE * FIELD_LOW;
+
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
+
+    canvas.width = SCREEN_W;
+    canvas.height = SCREEN_H;
+
 
     let tetro = [
         [0,0,0,0],
@@ -21,7 +32,9 @@
 
     drawTetro();
 
-    function drawTetro(){
+    function drawTetro()
+    {
+        ctx.clearRect(0,0,SCREEN_W,SCREEN_H);
         for(let y=0; y<TETRO_SIZE; y++)
         {
             for(let x=0; x<TETRO_SIZE; x++)
