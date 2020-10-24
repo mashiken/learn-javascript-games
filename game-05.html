@@ -16,23 +16,53 @@
         [0,0,0,0]
     ];
 
-    for(let y=0; y<TETRO_SIZE; y++)
-    {
-        for(let x=0; x<TETRO_SIZE; x++)
+    let tetro_x = 0;
+    let tetro_y = 0;
+
+    drawTetro();
+
+    function drawTetro(){
+        for(let y=0; y<TETRO_SIZE; y++)
         {
-            if( tetro[y][x] )
+            for(let x=0; x<TETRO_SIZE; x++)
             {
-                let px = x * BLOCK_SIZE;
-                let py = y * BLOCK_SIZE;
+                if( tetro[y][x] )
+                {
+                    let px = (tetro_x + x) * BLOCK_SIZE;
+                    let py = (tetro_y + y) * BLOCK_SIZE;
 
-                ctx.fillStyle="red";
-                ctx.fillRect(px,py, BLOCK_SIZE, BLOCK_SIZE);
+                    ctx.fillStyle="red";
+                    ctx.fillRect(px,py, BLOCK_SIZE, BLOCK_SIZE);
             
-                ctx.strokeStyle="black";
-                ctx.strokeRect(px,py, BLOCK_SIZE, BLOCK_SIZE);
+                    ctx.strokeStyle="black";
+                    ctx.strokeRect(px,py, BLOCK_SIZE, BLOCK_SIZE);
 
-            }
+                }
+            }   
         }
+    }
+
+
+    document.onkeydown = function(e){
+        switch( e.keyCode )
+        {
+            case 37:
+                tetro_x--;
+                break;
+            case 38:
+                tetro_y--;
+                break;
+            case 39:
+                tetro_x++;
+                break;
+            case 40:
+                tetro_y++;
+                break;
+            case 32:
+                break;
+            
+        }
+        drawTetro();
 
     }
 </script>
