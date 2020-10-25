@@ -1,19 +1,60 @@
 <html>
 <body>
-<canvas id="sample" width="500" height="630", style="display:block;margin:auto;background-color:#CCFFFF"></canvas>
+<canvas id="sample" width="800" height="630", style="display:block;margin:auto;background-color:#CCFFFF"></canvas>
 <script>
     var canvas = document.getElementById('sample');
     var context = canvas.getContext('2d');
 
+    function gradientBackground(){
+        context.beginPath();
+        var grad = context.createLinearGradient(0,0,0,canvas.height);
+        grad.addColorStop(0, '#CCFFFF');
+        grad.addColorStop(0.9, '#CCFFFF');
+        grad.addColorStop(1, '#0099CC');
+        context.fillStyle = grad;
+        context.fillRect(0,0,canvas.width,canvas.height);
+        
+    }
 
-    context.beginPath();
-    var grad = context.createLinearGradient(0,0,0,630);
-    grad.addColorStop(0, '#CCFFFF');
-    grad.addColorStop(0.9, '#CCFFFF');
-    grad.addColorStop(1, '#0099CC');
-    context.fillStyle = grad;
-    context.rect(0,0,500,630);
-    context.fill();
+    const tradeShip = {
+        x: null,
+        y: null,
+        width: 230,
+        height: 25,
+        speed: 0,
+
+        update: function(){
+            context.beginPath();
+            var grad = context.createLinearGradient(this.x,this.x,this.x,this.y + this.height);
+            grad.addColorStop(0, '#191970');
+            grad.addColorStop(0.95, '#191970');
+            grad.addColorStop(1, '#DC143C');
+            context.fillStyle = grad;
+            context.moveTo(this.x, this.y);
+            context.lineTo(this.x + this.width, this.y);
+            context.lineTo(this.x + this.width - 5, this.y + this.height);
+            context.lineTo(this.x + 5, this.y + this.height);
+            context.closePath();
+            context.fill();
+            context.stroke();
+            this.x += this.speed;
+        }
+    }
+
+    const init = () => {
+        tradeShip.x = canvas.width / 2 - tradeShip.width / 2;
+        tradeShip.y = canvas.height * 0.9;
+
+    }
+    const loop = () => {
+        context.clearRect(0,0,canvas.width,canvas.height);
+        gradientBackground();
+        tradeShip.update();
+    }
+
+    init();
+    loop();
+
 </script>
 </body>
 </html>
