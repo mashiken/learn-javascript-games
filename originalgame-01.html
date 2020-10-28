@@ -1,6 +1,6 @@
 <html>
 <body>
-<canvas id="sample" width="800" height="630", style="display:block;margin:auto;background-color:#CCFFFF"></canvas>
+<canvas id="sample" width="400" height="630", style="display:block;margin:auto;background-color:#CCFFFF"></canvas>
 <script>
     var canvas = document.getElementById('sample');
     var context = canvas.getContext('2d');
@@ -24,6 +24,7 @@
         speed: 0,
 
         update: function(){
+            this.x += this.speed;
             context.beginPath();
             var grad = context.createLinearGradient(this.x,this.x,this.x,this.y + this.height);
             grad.addColorStop(0, '#191970');
@@ -36,8 +37,7 @@
             context.lineTo(this.x + 5, this.y + this.height);
             context.closePath();
             context.fill();
-            context.stroke();
-            this.x += this.speed;
+            
         }
     }
 
@@ -54,6 +54,12 @@
 
     init();
     loop();
+
+    document.addEventListener('keydown', e => {
+        if(e.key == 'ArrowLeft') tradeShip.speed = -12;
+        if(e.key == 'ArrowRight') tradeShip.speed = 12;
+    });
+    document.addEventListener('keyup', () => tradeShip.speed = 0);
 
 </script>
 </body>
