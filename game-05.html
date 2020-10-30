@@ -22,6 +22,17 @@
     canvas.height = SCREEN_H;
     canvas.setAttribute('style','display:block;margin:auto;background-color: #ddd; border:4px solid #555');
 
+    const TETRO_COLORS = [
+        "#000",
+        "#6CF",
+        "#F92",
+        "#66F",
+        "#C5C",
+        "#FD2",
+        "#F44",
+        "#5B5",
+    ];
+
     const TETRO_TYPES = [
         [],
         [
@@ -50,12 +61,6 @@
         ],
         [
             [0,0,0,0],
-            [1,1,0,0],
-            [0,1,1,0],
-            [0,0,0,0]
-        ],
-        [
-            [0,0,0,0],
             [0,1,1,0],
             [0,1,1,0],
             [0,0,0,0]
@@ -79,7 +84,7 @@
 
     let tetro_x = START_X;
     let tetro_y = START_Y;
-    let tetro_t = Math.floor( Math.random() * TETRO_TYPES.length-1 )+1;
+    let tetro_t = Math.floor( Math.random() * (TETRO_TYPES.length -1) )+1;
     let tetro = TETRO_TYPES[ tetro_t ]
     let field = [];
     init();
@@ -100,13 +105,13 @@
         }
     }
 
-    function drawBlock(x,y)
+    function drawBlock(x,y,c)
     {
         {
             let px = x * BLOCK_SIZE;
             let py = y * BLOCK_SIZE;
-
-            ctx.fillStyle="red";
+            
+            ctx.fillStyle=TETRO_COLORS[c];
             ctx.fillRect(px,py, BLOCK_SIZE, BLOCK_SIZE);
     
             ctx.strokeStyle="black";
@@ -124,7 +129,7 @@
             {
                 if( field[y][x] )
                 {
-                    drawBlock(x,y);
+                    drawBlock(x,y, field[y][x]);
                 }
             }   
         }
@@ -135,7 +140,7 @@
             {
                 if( tetro[y][x] )
                 {
-                    drawBlock(tetro_x + x,tetro_y + y);
+                    drawBlock(tetro_x + x,tetro_y + y, tetro_t);
                 }
             }   
         }
@@ -186,8 +191,8 @@
         if( checkMove(0,1))tetro_y++;
         else
         {
-            fixTetro()
-            tetro_t = Math.floor( Math.random() * TETRO_TYPES.length-1 )+1;
+            fixTetro();
+            tetro_t = Math.floor( Math.random() * (TETRO_TYPES.length-1) )+1;
             tetro = TETRO_TYPES[ tetro_t ]
             tetro_x = START_X;
             tetro_y = START_Y;
@@ -203,7 +208,7 @@
             {
                 if( tetro[y][x])
                 {
-                    field[tetro_y + y][tetro_x + x] = 1;
+                    field[tetro_y + y][tetro_x + x] = tetro_t;
                 }
             }
         }
