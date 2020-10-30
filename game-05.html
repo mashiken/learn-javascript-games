@@ -145,6 +145,18 @@
                 }
             }   
         }
+        if(over)
+        {
+            let s="GAME OVER"
+            ctx.font = "40px 'MS ゴシック'";
+            let w = ctx.measureText(s).width;
+            let x = SCREEN_W/2 - w/2;
+            let y = SCREEN_H/2 - 20;
+            ctx.lineWidth = 4;
+            ctx.strokeText(s,x,y);
+            ctx.fillStyle="white";
+            ctx.fillText(s,x,y);
+        }
     }
 
     function checkMove( mx, my , ntetro )
