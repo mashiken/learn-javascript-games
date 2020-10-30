@@ -22,17 +22,65 @@
     canvas.height = SCREEN_H;
     canvas.setAttribute('style','display:block;margin:auto;background-color: #ddd; border:4px solid #555');
 
-
-    let tetro = [
-        [0,0,0,0],
-        [1,1,0,0],
-        [0,1,1,0],
-        [0,0,0,0]
+    const TETRO_TYPES = [
+        [],
+        [
+            [0,0,0,0],
+            [1,1,1,1],
+            [0,0,0,0],
+            [0,0,0,0]
+        ],
+        [
+            [0,1,0,0],
+            [0,1,0,0],
+            [0,1,1,0],
+            [0,0,0,0]
+        ],
+        [
+            [0,0,1,0],
+            [0,0,1,0],
+            [0,1,1,0],
+            [0,0,0,0]
+        ],
+        [
+            [0,1,0,0],
+            [0,1,1,0],
+            [0,1,0,0],
+            [0,0,0,0]
+        ],
+        [
+            [0,0,0,0],
+            [1,1,0,0],
+            [0,1,1,0],
+            [0,0,0,0]
+        ],
+        [
+            [0,0,0,0],
+            [0,1,1,0],
+            [0,1,1,0],
+            [0,0,0,0]
+        ],
+        [
+            [0,0,0,0],
+            [1,1,0,0],
+            [0,1,1,0],
+            [0,0,0,0]
+        ],
+        [
+            [0,0,0,0],
+            [0,1,1,0],
+            [1,1,0,0],
+            [0,0,0,0]
+        ],
     ];
 
-    let tetro_x = 0;
-    let tetro_y = 0;
-    
+    const START_X = FIELD_COL/2 - TETRO_SIZE/2;
+    const START_Y = 0;
+
+    let tetro_x = START_X;
+    let tetro_y = START_Y;
+    let tetro_t = Math.floor( Math.random() * TETRO_TYPES.length-1 )+1;
+    let tetro = TETRO_TYPES[ tetro_t ]
     let field = [];
     init();
     drawAll();
@@ -139,8 +187,10 @@
         else
         {
             fixTetro()
-            tetro_x = 0;
-            tetro_y = 0;
+            tetro_t = Math.floor( Math.random() * TETRO_TYPES.length-1 )+1;
+            tetro = TETRO_TYPES[ tetro_t ]
+            tetro_x = START_X;
+            tetro_y = START_Y;
         }
         drawAll();
     }
