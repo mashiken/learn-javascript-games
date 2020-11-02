@@ -4,10 +4,10 @@
 <canvas id="canvas"></canvas>
 <script>
 
-    const FIELD_COL = 10;
-    const FIELD_ROW = 20;
+    const FIELD_COL = 20;
+    const FIELD_ROW = 40;
 
-    const BLOCK_SIZE = 30;
+    const BLOCK_SIZE = 60;
     const TETRO_SIZE = 4;
 
     let canvas = document.getElementById("canvas");
@@ -19,7 +19,7 @@
     canvas.width = SCREEN_W;
     canvas.height = SCREEN_H;
 
-    canvas.setAttribute('style','display:block;margin:auto;background-color: #ddd; border:4px solid #555');
+    canvas.setAttribute('style','display:block;margin:auto;background-color: #ddd; border:8px solid #555');
 
     let tetro_x = 0;
     let tetro_y = 0;
