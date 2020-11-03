@@ -17,3 +17,30 @@ let con = can.getContext("2d");
 can.width = CANVAS_W;
 can.height = CANVAS_H;
 
+function rand(min, max){
+    return Math.floor( Math.random() * (max-min+1))+min;
+}
+
+// ★クラス
+class Star{
+    constructor(){
+        this.x = rand(0,FIELD_W)<<8;
+        this.y = rand(0,FIELD_H)<<8;
+        this.vx = 0;
+        this.vy = rand(30,200);
+        this.sz = rand(1,2);
+    }
+    draw(){
+        con.fillStyle=rand(0,2)!=0?"66f":"#8af";
+        con.fillRect(this.x>>8, this.y>>8, this.sz, this.sz);
+    }
+    update(){
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if(this.y>FIELD_H<<8){
+            this.y = 0;
+            this.x = rand(0,FIELD_W)<<8;
+        }
+    }
+}
