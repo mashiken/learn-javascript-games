@@ -10,6 +10,9 @@ const CANVAS_H = SCREEN_H *2;
 const FIELD_W = SCREEN_W *2;
 const FIELD_H = SCREEN_H *2;
 
+// ★の数
+const STAR_MAX = 300;
+
 // キャンバス
 let can = document.getElementById("can");
 let con = can.getContext("2d");
@@ -44,3 +47,11 @@ class Star{
         }
     }
 }
+
+let star=[];
+for(let i=0; i<STAR_MAX;i++)star[i] = new Star();
+
+con.fillStyle="black";
+con.fillRect(0,0,SCREEN_W,SCREEN_H);
+
+for(let i=0; i<STAR_MAX;i++)star[i].draw();
