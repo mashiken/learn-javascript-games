@@ -19,9 +19,14 @@ const STAR_MAX = 300;
 // キャンバス
 let can = document.getElementById("can");
 let con = can.getContext("2d");
-
 can.width = CANVAS_W;
 can.height = CANVAS_H;
+
+// フィールド(仮想画面)
+let vcan = document.createElement("canvas");
+let vcon = vcan.getContext("2d");
+vcan.width = FIELD_W;
+vcan.height = FIELD_H;
 
 function rand(min, max){
     return Math.floor( Math.random() * (max-min+1))+min;
@@ -37,8 +42,8 @@ class Star{
         this.sz = rand(1,2);
     }
     draw(){
-        con.fillStyle=rand(0,2)!=0?"66f":"#8af";
-        con.fillRect(this.x>>8, this.y>>8, this.sz, this.sz);
+        vcon.fillStyle=rand(0,2)!=0?"66f":"#8af";
+        vcon.fillRect(this.x>>8, this.y>>8, this.sz, this.sz);
     }
     update(){
         this.x += this.vx;
@@ -60,8 +65,11 @@ function gameLoop(){
     // 移動の処理
     for(let i=0; i<STAR_MAX;i++)star[i].update();
     // 描画の処理
-    con.fillStyle="black";
-    con.fillRect(0,0,SCREEN_W*2,SCREEN_H*2);
+    vcon.fillStyle="black";
+    vcon.fillRect(0,0,SCREEN_W,SCREEN_H);
 
     for(let i=0; i<STAR_MAX;i++)star[i].draw();
+    // 仮想画面から実際のキャンバスにコピー
+    con.drawImage( vcan, 0,0,SCREEN_W,SCREEN_H,
+                0,0,CANVAS_W,CANVAS_H);
 }
