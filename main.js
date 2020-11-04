@@ -31,9 +31,9 @@ vcan.height = FIELD_H;
 // カメラの座標
 let camera_x = 0;
 let camera_y = 0;
-
-
-
+// 星の実態
+let star=[];
+// 整数のランダムを作る
 function rand(min, max){
     return Math.floor( Math.random() * (max-min+1))+min;
 }
@@ -66,9 +66,13 @@ class Star{
     }
 }
 
-let star=[];
-for(let i=0; i<STAR_MAX;i++)star[i] = new Star();
-setInterval( gameLoop, GAME_SPEED);
+
+// 初期化
+function gameInit(){
+    for(let i=0; i<STAR_MAX;i++)star[i] = new Star();
+    setInterval( gameLoop, GAME_SPEED);
+}
+
 // ゲームループ
 function gameLoop(){
     // 移動の処理
@@ -81,4 +85,9 @@ function gameLoop(){
     // 仮想画面から実際のキャンバスにコピー
     con.drawImage( vcan, 0,0,SCREEN_W,SCREEN_H,
                 0,0,CANVAS_W,CANVAS_H);
+}
+
+// オンロードでゲーム開始
+window.onload=function(){
+    gameInit();
 }
