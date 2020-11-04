@@ -28,6 +28,12 @@ let vcon = vcan.getContext("2d");
 vcan.width = FIELD_W;
 vcan.height = FIELD_H;
 
+// カメラの座標
+let camera_x = 0;
+let camera_y = 0;
+
+
+
 function rand(min, max){
     return Math.floor( Math.random() * (max-min+1))+min;
 }
@@ -42,6 +48,10 @@ class Star{
         this.sz = rand(1,2);
     }
     draw(){
+        let x=this.x>>8;
+        let y=this.y>>8;
+        if( x<camera_x || x>camera_x+SCREEN_W ||
+            y<camera_y || y>camera_y+SCREEN_H)return;
         vcon.fillStyle=rand(0,2)!=0?"66f":"#8af";
         vcon.fillRect(this.x>>8, this.y>>8, this.sz, this.sz);
     }
@@ -58,7 +68,6 @@ class Star{
 
 let star=[];
 for(let i=0; i<STAR_MAX;i++)star[i] = new Star();
-
 setInterval( gameLoop, GAME_SPEED);
 // ゲームループ
 function gameLoop(){
